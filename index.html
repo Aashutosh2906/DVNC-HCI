@@ -10,36 +10,95 @@
 <body>
     <canvas id="neuralCanvas"></canvas>
 
-    <nav class="agent-nav">
-        <div class="nav-content">
-            <a href="#" class="logo" id="logoHome">
-                <svg width="110" height="24" viewBox="0 0 110 24">
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:var(--primary);" />
-                            <stop offset="100%" style="stop-color:var(--primary-dark);" />
-                        </linearGradient>
-                    </defs>
-                    <text x="0" y="18" font-family="'Inter', sans-serif" font-size="20" font-weight="600" letter-spacing="-0.5" fill="var(--text-primary)">
-                        DVNC
-                        <tspan fill="url(#logoGradient)">.AI</tspan>
-                    </text>
-                </svg>
-            </a>
-            <div class="nav-actions">
-                <button class="nav-icon-btn hidden" id="newSessionBtn" title="New Session">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
+    <main id="app-container">
+        <nav class="agent-nav">
+            <div class="nav-content">
+                <a href="#" class="logo" id="logoHome">
+                    <svg width="110" height="24" viewBox="0 0 110 24">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:var(--primary);" />
+                                <stop offset="100%" style="stop-color:var(--primary-dark);" />
+                            </linearGradient>
+                        </defs>
+                        <text x="0" y="18" font-family="'Inter', sans-serif" font-size="20" font-weight="600" letter-spacing="-0.5" fill="var(--text-primary)">
+                            DVNC
+                            <tspan fill="url(#logoGradient)">.AI</tspan>
+                        </text>
+                    </svg>
+                </a>
+                <div class="nav-actions">
+                    <button class="nav-icon-btn hidden" id="newSessionBtn" title="New Session">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="chat-container">
+            <div class="welcome-section" id="welcomeSection">
+                <div class="agent-core">
+                    <svg class="systems-thinking-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="var(--primary)" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <circle class="core-glow-circle" cx="50" cy="50" r="50" fill="url(#coreGlow)"/>
+                        <g class="nodes">
+                            <circle class="node" cx="50" cy="20" r="3"/>
+                            <circle class="node" cx="78" cy="36" r="3"/>
+                            <circle class="node" cx="78" cy="64" r="3"/>
+                            <circle class="node" cx="50" cy="80" r="3"/>
+                            <circle class="node" cx="22" cy="64" r="3"/>
+                            <circle class="node" cx="22" cy="36" r="3"/>
+                            <circle class="node main-node" cx="50" cy="50" r="5"/>
+                        </g>
+                        <g class="connections">
+                            <line class="connection" x1="50" y1="20" x2="50" y2="50"/>
+                            <line class="connection" x1="78" y1="36" x2="50" y2="50"/>
+                            <line class="connection" x1="78" y1="64" x2="50" y2="50"/>
+                            <line class="connection" x1="50" y1="80" x2="50" y2="50"/>
+                            <line class="connection" x1="22" y1="64" x2="50" y2="50"/>
+                            <line class="connection" x1="22" y1="36" x2="50" y2="50"/>
+                        </g>
+                    </svg>
+                </div>
+                <h1 class="welcome-title">Leonardo's Intelligence. <br>Reimagined for the 21st Century.</h1>
+                <p class="welcome-subtitle">A Systems Thinking AI that integrates natural systems, technological principles, and human creativity to unlock novel solutions to complex problems.</p>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                </div>
+        </div>
+
+        <div class="input-container">
+            <div class="input-wrapper">
+                <div class="agent-input-group">
+                    <button class="input-icon-btn" id="attachFileBtn" title="Attach File">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                    </button>
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        class="agent-input" 
+                        placeholder="Pose a problem or design challenge..."
+                        autocomplete="off"
+                    >
+                    <button id="sendButton" class="input-icon-btn send-btn" title="Send (Enter)">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+                
+                <div class="agent-status-bar">
+                    <div class="suggested-actions" id="suggestedActions">
+                        </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </main>
 
-    <div class="chat-container">
-        <div class="welcome-section" id="welcomeSection">
-            <div class="agent-core">
-                <svg class="systems-thinking-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.3"/>
-                            <stop offset="100%" stop-color="var(--primary)" stop-opacity="0"/>
-                        </
+    <script src="script.js"></script>
+</body>
+</html>
