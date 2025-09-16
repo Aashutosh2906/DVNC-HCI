@@ -8,16 +8,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <canvas id="neuralCanvas"></canvas>
+
     <nav class="agent-nav">
         <div class="nav-content">
-            <a href="#" class="logo-text" id="logoHome">DVNC.AI</a>
+            <a href="#" class="logo" id="logoHome">
+                <svg width="110" height="24" viewBox="0 0 110 24">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:var(--primary);" />
+                            <stop offset="100%" style="stop-color:var(--primary-dark);" />
+                        </linearGradient>
+                    </defs>
+                    <text x="0" y="18" font-family="'Inter', sans-serif" font-size="20" font-weight="600" letter-spacing="-0.5" fill="var(--text-primary)">
+                        DVNC
+                        <tspan fill="url(#logoGradient)">.AI</tspan>
+                    </text>
+                </svg>
+            </a>
             <div class="nav-actions">
-                <button class="nav-icon-btn" id="newSessionBtn" title="New Session">
+                <button class="nav-icon-btn hidden" id="newSessionBtn" title="New Session">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-                </button>
-                <button class="nav-icon-btn" id="settingsBtn" title="Settings & Profile">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                 </button>
             </div>
         </div>
@@ -30,7 +41,7 @@
                 <svg class="core-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="10"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"></path></svg>
             </div>
             <h1 class="welcome-title" id="welcome-greeting">Good evening.</h1>
-            <p class="welcome-subtitle">I am DVNC, your intelligence agent. How can I provide clarity and accelerate your work today?</p>
+            <p class="welcome-subtitle">I am DVNC. I synthesize knowledge across disciplines to solve complex problems. Present your challenge.</p>
         </div>
 
         <div class="chat-messages" id="chatMessages">
@@ -47,7 +58,7 @@
                     type="text" 
                     id="messageInput" 
                     class="agent-input" 
-                    placeholder="Ask a question or issue a command..."
+                    placeholder="Pose a problem or design challenge..."
                     autocomplete="off"
                 >
                 <button id="sendButton" class="input-icon-btn send-btn" title="Send (Enter)">
@@ -56,10 +67,6 @@
             </div>
             
             <div class="agent-status-bar">
-                <div class="agent-status" id="agentStatus">
-                    <div class="status-dot"></div>
-                    <span id="statusText">Idle</span>
-                </div>
                 <div class="suggested-actions" id="suggestedActions">
                     </div>
             </div>
